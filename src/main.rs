@@ -1,8 +1,10 @@
-use convert_image_rs::image::Image;
+pub mod args;
+pub mod image;
+
+use crate::image::Image;
 
 fn main() {
     let mut image = Image::new();
 
-    image.scale();
-    image.save();
+    image.process();
 }

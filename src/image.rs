@@ -1,5 +1,5 @@
 use clap::Parser;
-use image::{imageops::FilterType, DynamicImage, GenericImageView};
+use image::{imageops::FilterType, DynamicImage};
 use std::path::PathBuf;
 
 use crate::args::Args;
@@ -32,7 +32,7 @@ impl Image {
         }
     }
 
-    pub fn save(self) {
+    fn save(&mut self) {
         match self.img.save(&self.output) {
             Ok(image) => image,
             Err(error) => {
@@ -42,9 +42,26 @@ impl Image {
         };
     }
 
-    pub fn scale(&mut self) {
+    fn scale(&mut self) {
         self.img = self
             .img
             .resize(self.width.unwrap(), self.height.unwrap(), self.filter);
+    }
+
+    pub fn process(&mut self) {
+        match (self.width, self.height) {
+            (Some(_), Some(_)) => self.scale(),
+            (None, Some(_)) => {
+                println!("Error: Please provide a width with the -w flag. Desired height and width are both required for resizing.");
+                std::process::exit(1);
+            }
+            (Some(_), None) => {
+                println!("Error: Please provide a height with the -h flag. Desired height and width are both required for resizing.");
+                std::process::exit(1);
+            }
+            _ => (),
+        }
+
+        self.save();
     }
 }
