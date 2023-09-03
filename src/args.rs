@@ -16,4 +16,3 @@ pub struct Args {
     #[arg(short, long)]
     pub height: Option<u32>,
 }
-
