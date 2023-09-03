@@ -1,6 +1,9 @@
 ## Executables
 /target
 
+## test images
+/img
+
 ## File system
 .DS_Store
 desktop.ini
