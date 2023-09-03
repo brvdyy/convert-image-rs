@@ -8,6 +8,12 @@ pub struct Args {
     pub input: PathBuf,
 
     #[arg(short, long)]
-    pub output: PathBuf
+    pub output: PathBuf,
+
+    #[arg(short, long)]
+    pub width: Option<u32>,
+
+    #[arg(short, long)]
+    pub height: Option<u32>,
 }
 

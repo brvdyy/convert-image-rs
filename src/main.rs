@@ -1,7 +1,8 @@
 use convert_image_rs::image::Image;
 
 fn main() {
-    let image = Image::new();
+    let mut image = Image::new();
 
+    image.scale();
     image.save();
 }
